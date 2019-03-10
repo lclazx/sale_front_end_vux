@@ -4,13 +4,15 @@ import Vue from 'vue'
 import FastClick from 'fastclick'
 import App from './App'
 import router from './router'
-
+import { WechatPlugin, AjaxPlugin } from 'vux'
+import wechat_utils from './utils/wechat_utils'
+Vue.use(WechatPlugin);
+Vue.use(AjaxPlugin);
+wechat_utils.init_wechat();
 FastClick.attach(document.body)
-
 Vue.config.productionTip = false
-
-/* eslint-disable no-new */
+    /* eslint-disable no-new */
 new Vue({
-  router,
-  render: h => h(App)
+    router,
+    render: h => h(App)
 }).$mount('#app-box')
