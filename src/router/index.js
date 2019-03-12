@@ -30,10 +30,9 @@ export default new Router({
         path: 'me',
         component: Me
       },
-      {
-        path: 'project/:id',
-        component: ProjectDetail
-      }
     ]
+  }, {
+    path: '/project/:id',
+    component: ProjectDetail
   }]
 })

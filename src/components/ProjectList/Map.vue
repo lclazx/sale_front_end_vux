@@ -30,10 +30,11 @@ import { BaiduMap, BmMarker } from "vue-baidu-map";
 import ProjectInfo from "../controls/ProjectInfo.vue";
 import CustomMarker from "../controls/CustomMarker.vue";
 export default {
+  props: { location: Object },
   components: { BaiduMap, BmMarker, ProjectInfo, CustomMarker },
   data() {
     return {
-      center: "北京",
+      center: this.$props.location || "广州",
       zoom: 10,
       mapStyle: {},
       projects: [],

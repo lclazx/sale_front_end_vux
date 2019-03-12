@@ -1,17 +1,21 @@
 <template>
-  <div id="app" style="height:100%">
+  <div
+    id="app"
+    style="height:100%"
+  >
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app'
-}
+  name: "app"
+};
 </script>
 
 <style lang="less">
-@import '~vux/src/styles/reset.less';
+@import "~vux/src/styles/reset.less";
+@import "~vux/src/styles/1px.less";
 
 body {
   background-color: #fbf9fe;
