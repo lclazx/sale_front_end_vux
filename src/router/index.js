@@ -8,35 +8,39 @@ import Contact from '@/components/ProjectList/Contact.vue'
 import Me from '@/components/ProjectList/Contact.vue'
 import ProjectDetail from '@/components/ProjectList/ProjectDetail.vue'
 import Consult from '@/components/client/Consult.vue'
+import Frame from '@/components/ProjectList/Frame.vue'
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [{
-    path: '/',
-    name: 'Container',
-    component: Container,
-    children: [{
-        path: 'list',
-        component: List
-      }, {
-        path: 'map',
-        component: Map
-      },
-      {
-        path: 'contact',
-        component: Contact
-      },
-      {
-        path: 'me',
-        component: Me
-      }, {
-        path: '/client/consult',
-        component: Consult
-      }
-    ]
-  }, {
-    path: '/project/:id',
-    component: ProjectDetail
-  }, ]
+    routes: [{
+        path: '/',
+        name: 'Container',
+        component: Container,
+        children: [{
+                path: 'list',
+                component: List
+            }, {
+                path: 'map',
+                component: Map
+            },
+            {
+                path: 'contact',
+                component: Contact
+            },
+            {
+                path: 'me',
+                component: Me
+            }, {
+                path: '/client/consult',
+                component: Consult
+            }, {
+                path: '/test',
+                component: Frame
+            }
+        ]
+    }, {
+        path: '/project/:id',
+        component: ProjectDetail
+    }, ]
 })

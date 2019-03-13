@@ -1,18 +1,13 @@
 <template>
   <div style="height:100%">
-    <view-box ref="viewBox">
+    <view-box ref="viewBox" body-padding-top="45px">
       <x-header
         slot="header"
         style="width:100%;position:absolute;left:0;top:0;z-index:100;"
-      >
-        {{project.name}}
-      </x-header>
+      >{{project.name}}</x-header>
       <tabbar slot="bottom">
         <tabbar-item link="/contact">
-          <img
-            slot="icon"
-            src="../../assets/img/contact.png"
-          >
+          <img slot="icon" src="../../assets/img/contact.png">
           <span slot="label">联系客服</span>
         </tabbar-item>
       </tabbar>
@@ -27,24 +22,18 @@
             dots-position="center"
           ></swiper>
           <card :header="{title:'项目信息'}">
-            <div
-              slot="content"
-              class="card-demo-flex card-demo-content01"
-            >
+            <div slot="content" class="card-demo-flex card-demo-content01">
               <div class="vux-1px-r">
                 <span>{{project.price}}</span>
-                <br>
-                单价
+                <br>单价
               </div>
               <div class="vux-1px-r">
                 <span>{{project.area}}</span>
-                <br>
-                面积
+                <br>面积
               </div>
               <div class="vux-1px-r">
                 <span>{{project.price}}</span>
-                <br>
-                单价
+                <br>单价
               </div>
             </div>
           </card>
@@ -58,8 +47,7 @@
           class="bm-view"
           ak="3662942c3c1ec12221e4ac924ee11efe"
         >
-          <bm-marker :position="project.location">
-          </bm-marker>
+          <bm-marker :position="project.location"></bm-marker>
         </baidu-map>
       </div>
     </view-box>
@@ -139,7 +127,7 @@ export default {
   display: inline-flex;
   flex-direction: column;
   align-items: stretch;
-  width:100%;
+  width: 100%;
   flex: 1;
 }
 

@@ -38,7 +38,6 @@
       </group>
       <x-button
         text="提交"
-        :columns="3"
         @click.native="submit"
         :show-loading="button_loading"
         :disabled="button_disabled"
