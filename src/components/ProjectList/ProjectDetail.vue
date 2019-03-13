@@ -1,56 +1,99 @@
 <template>
-  <div>
-    <swiper
-      :list="images"
-      auto
-      style="width:80%;margin:0 auto;"
-      height="180px"
-      dots-class="custom-bottom"
-      dots-position="center"
-    ></swiper>
-    <card :header="{title:'项目信息'}">
-      <div
-        slot="content"
-        class="card-demo-flex card-demo-content01"
+  <div style="height:100%">
+    <view-box ref="viewBox">
+      <x-header
+        slot="header"
+        style="width:100%;position:absolute;left:0;top:0;z-index:100;"
       >
-        <div class="vux-1px-r">
-          <span>{{project.price}}</span>
-          <br>
-          单价
+        {{project.name}}
+      </x-header>
+      <tabbar slot="bottom">
+        <tabbar-item link="/contact">
+          <img
+            slot="icon"
+            src="../../assets/img/contact.png"
+          >
+          <span slot="label">联系客服</span>
+        </tabbar-item>
+      </tabbar>
+      <div class="flex-container">
+        <div clas="info-container">
+          <swiper
+            :list="images"
+            auto
+            style="width:100%;margin:0 auto;"
+            height="180px"
+            dots-class="custom-bottom"
+            dots-position="center"
+          ></swiper>
+          <card :header="{title:'项目信息'}">
+            <div
+              slot="content"
+              class="card-demo-flex card-demo-content01"
+            >
+              <div class="vux-1px-r">
+                <span>{{project.price}}</span>
+                <br>
+                单价
+              </div>
+              <div class="vux-1px-r">
+                <span>{{project.area}}</span>
+                <br>
+                面积
+              </div>
+              <div class="vux-1px-r">
+                <span>{{project.price}}</span>
+                <br>
+                单价
+              </div>
+            </div>
+          </card>
         </div>
-        <div class="vux-1px-r">
-          <span>{{project.area}}</span>
-          <br>
-          面积
-        </div>
-        <div class="vux-1px-r">
-          <span>{{project.price}}</span>
-          <br>
-          单价
-        </div>
+        <divider>项目地址</divider>
+        <baidu-map
+          ref="map"
+          :zoom="zoom"
+          :center="project.location"
+          :scroll-wheel-zoom="true"
+          class="bm-view"
+          ak="3662942c3c1ec12221e4ac924ee11efe"
+        >
+          <bm-marker :position="project.location">
+          </bm-marker>
+        </baidu-map>
       </div>
-    </card>
-    <baidu-map
-      ref="map"
-      :zoom="zoom"
-      :center="project.location"
-      :scroll-wheel-zoom="true"
-      class="bm-view"
-      ak="3662942c3c1ec12221e4ac924ee11efe"
-    >
-      <bm-marker :position="project.location">
-
-      </bm-marker>
-    </baidu-map>
+    </view-box>
   </div>
 </template>
 
 <script>
-import { Swiper, Card } from "vux";
+import {
+  Swiper,
+  Card,
+  Divider,
+  ViewBox,
+  XHeader,
+  Flexbox,
+  FlexboxItem,
+  Tabbar,
+  TabbarItem
+} from "vux";
 import { BaiduMap, BmMarker } from "vue-baidu-map";
 export default {
   props: { id: Number },
-  components: { Swiper, Card, BaiduMap, BmMarker },
+  components: {
+    Swiper,
+    Card,
+    BaiduMap,
+    BmMarker,
+    Divider,
+    Flexbox,
+    FlexboxItem,
+    ViewBox,
+    XHeader,
+    Tabbar,
+    TabbarItem
+  },
   data() {
     return {
       images: [
@@ -63,7 +106,8 @@ export default {
       project: {
         price: 20000,
         area: "80|100|120",
-        location: { lat: 23.0, lng: 113.0 }
+        location: { lat: 23.0, lng: 113.0 },
+        name: "时代天韵"
       },
       zoom: 15
     };
@@ -92,9 +136,29 @@ export default {
   color: #f74c31;
 }
 .bm-view {
-  height: 200px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  width:100%;
+  flex: 1;
 }
-.map-container {
+
+.flex-container {
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
   height: 100%;
+  -webkit-box-orient: vertical;
+}
+
+.info-container {
+  flex-grow: 0;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 </style>

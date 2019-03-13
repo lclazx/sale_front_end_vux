@@ -7,6 +7,7 @@ import Map from '@/components/ProjectList/Map.vue'
 import Contact from '@/components/ProjectList/Contact.vue'
 import Me from '@/components/ProjectList/Contact.vue'
 import ProjectDetail from '@/components/ProjectList/ProjectDetail.vue'
+import Consult from '@/components/client/Consult.vue'
 
 Vue.use(Router)
 
@@ -29,10 +30,13 @@ export default new Router({
       {
         path: 'me',
         component: Me
-      },
+      }, {
+        path: '/client/consult',
+        component: Consult
+      }
     ]
   }, {
     path: '/project/:id',
     component: ProjectDetail
-  }]
+  }, ]
 })

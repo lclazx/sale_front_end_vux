@@ -1,13 +1,13 @@
 <template>
   <div style="height:100%">
-    <view-box ref="viewBox">
-      <x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">
-        <x-icon
-          slot="overwrite-left"
-          type="navicon"
-          size="35"
-          style="fill:#fff;position:relative;top:-8px;left:-3px;"
-        ></x-icon>
+    <view-box
+      ref="viewBox"
+      body-padding-top="50px"
+    >
+      <x-header
+        slot="header"
+        style="width:100%;position:absolute;left:0;top:0;z-index:100;"
+      >
         <span>{{title}}</span>
         <x-icon
           slot="right"
@@ -19,19 +19,31 @@
       <router-view></router-view>
       <tabbar slot="bottom">
         <tabbar-item link="/list">
-          <img slot="icon" src="../assets/img/building.png">
+          <img
+            slot="icon"
+            src="../assets/img/building.png"
+          >
           <span slot="label">列表</span>
         </tabbar-item>
         <tabbar-item link="/map">
-          <img slot="icon" src="../assets/img/map.png">
+          <img
+            slot="icon"
+            src="../assets/img/map.png"
+          >
           <span slot="label">地图</span>
         </tabbar-item>
         <tabbar-item link="/contact">
-          <img slot="icon" src="../assets/img/contact.png">
+          <img
+            slot="icon"
+            src="../assets/img/contact.png"
+          >
           <span slot="label">联系客服</span>
         </tabbar-item>
         <tabbar-item link="/me">
-          <img slot="icon" src="../assets/img/me.png">
+          <img
+            slot="icon"
+            src="../assets/img/me.png"
+          >
           <span slot="label">个人中心</span>
         </tabbar-item>
       </tabbar>

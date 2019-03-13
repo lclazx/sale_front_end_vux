@@ -8,8 +8,15 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-  name: "app"
+  name: "app",
+  created() {},
+  methods: {
+    get_user_info() {
+      
+    }
+  }
 };
 </script>
 
