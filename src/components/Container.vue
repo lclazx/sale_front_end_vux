@@ -2,7 +2,7 @@
   <div style="height:100%">
     <view-box
       ref="viewBox"
-      body-padding-top="50px"
+      body-padding-top="45px"
     >
       <x-header
         slot="header"

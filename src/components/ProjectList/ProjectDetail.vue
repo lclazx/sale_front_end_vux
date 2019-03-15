@@ -1,6 +1,9 @@
 <template>
   <div style="height:100%">
-    <view-box ref="viewBox">
+    <view-box
+      ref="viewBox"
+      body-padding-top="45px"
+    >
       <x-header
         slot="header"
         style="width:100%;position:absolute;left:0;top:0;z-index:100;"
@@ -139,7 +142,7 @@ export default {
   display: inline-flex;
   flex-direction: column;
   align-items: stretch;
-  width:100%;
+  width: 100%;
   flex: 1;
 }
 
