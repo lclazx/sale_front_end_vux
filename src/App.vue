@@ -1,21 +1,22 @@
 <template>
-  <div
-    id="app"
-    style="height:100%"
-  >
+  <div id="app" style="height:100%">
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
+import wechat_util from "./utils/wechat_utils";
 export default {
   name: "app",
-  created() {},
+  created() {
+    // wechat_util.check_login();
+  },
+  mounted() {
+    wechat_util.check_login();
+  },
   methods: {
-    get_user_info() {
-      
-    }
+    get_user_info() {}
   }
 };
 </script>

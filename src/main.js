@@ -9,6 +9,7 @@ import wechat_utils from './utils/wechat_utils'
 Vue.use(WechatPlugin);
 Vue.use(AjaxPlugin);
 wechat_utils.init_wechat();
+wechat_utils.init_interceptor();
 FastClick.attach(document.body)
 Vue.config.productionTip = false
     /* eslint-disable no-new */
