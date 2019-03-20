@@ -29,6 +29,7 @@
 import { BaiduMap, BmMarker } from "vue-baidu-map";
 import ProjectInfo from "../controls/ProjectInfo.vue";
 import CustomMarker from "../controls/CustomMarker.vue";
+import sale_utils from "../../utils/sale_utils";
 export default {
   props: { location: Object },
   components: { BaiduMap, BmMarker, ProjectInfo, CustomMarker },
@@ -56,21 +57,29 @@ export default {
       this.currentProject = e;
     }
   },
-  mounted() {
-    let _this = this;
-    this.$wechat.getLocation({
-      type: "wgs84",
-      success: function(res) {
-        var latitude = res.latitude;
-        var longitude = res.longitude;
-        _this.center = { lat: latitude, lng: longitude };
-        _this.center.lng = longitude;
-        _this.center.lat = latitude;
-        // this.center = "广州";
-        _this.zoom = 10;
-        console.log(_this.center);
-      }
-    });
+  async mounted() {
+    this.projects = await sale_utils.getProjects();
+    if (this.$route.params.id) {
+      let project = this.projects.find(
+        x => x.projectInfoId == this.$route.params.id
+      );
+      this.center = { lat: project.lat/1000, lng: project.log/1000 };
+      this.currentProject = project;
+    } else {
+      let _this = this;
+      this.$wechat.getLocation({
+        type: "wgs84",
+        success: function(res) {
+          var latitude = res.latitude;
+          var longitude = res.longitude;
+          _this.center = { lat: latitude, lng: longitude };
+          _this.center.lng = longitude;
+          _this.center.lat = latitude;
+          _this.zoom = 10;
+          console.log(_this.center);
+        }
+      });
+    }
   }
 };
 </script>

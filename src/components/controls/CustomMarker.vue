@@ -9,10 +9,10 @@
       @open="project.showInfo=true"
       @close="close"
     >
-      <project-info
+      <!-- <project-info
         :project="project"
         :sale="sale"
-      ></project-info>
+      ></project-info> -->
     </bm-info-window>
   </bm-marker>
 </template>

@@ -24,7 +24,7 @@ export default {
                 timestamp: timestamp,
                 nonceStr: nonce,
                 signature: res.data,
-                jsApiList: ['getLocation']
+                jsApiList: ['getLocation', 'chooseImage', 'uploadImage']
             })
             Vue.wechat.ready(function() {
                 console.log("ready");

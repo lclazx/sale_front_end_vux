@@ -9,6 +9,7 @@ import Me from '@/components/ProjectList/Contact.vue'
 import ProjectDetail from '@/components/ProjectList/ProjectDetail.vue'
 import Consult from '@/components/client/Consult.vue'
 import Frame from '@/components/ProjectList/Frame.vue'
+import Promote from '@/components/client/Promote.vue'
 
 Vue.use(Router)
 
@@ -23,6 +24,9 @@ export default new Router({
             }, {
                 path: 'map',
                 component: Map
+            }, {
+                path: 'map/:id',
+                component: Map
             },
             {
                 path: 'contact',
@@ -35,8 +39,11 @@ export default new Router({
                 path: '/client/consult',
                 component: Consult
             }, {
-                path: '/test',
+                path: 'projectDetail/:id',
                 component: Frame
+            }, {
+                path: 'promote',
+                component: Promote
             }
         ]
     }, {

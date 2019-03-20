@@ -1,9 +1,6 @@
 <template>
   <div style="height:100%">
-    <view-box
-      ref="viewBox"
-      body-padding-top="45px"
-    >
+    <view-box ref="viewBox" body-padding-top="45px">
       <x-header
         slot="header"
         style="width:100%;position:absolute;left:0;top:0;z-index:100;"
@@ -70,6 +67,7 @@ import {
   TabbarItem
 } from "vux";
 import { BaiduMap, BmMarker } from "vue-baidu-map";
+import sale_utils from "../../utils/sale_utils";
 export default {
   props: { id: Number },
   components: {
@@ -95,16 +93,33 @@ export default {
         }
       ],
       project: {
-        price: 20000,
-        area: "80|100|120",
-        location: { lat: 23.0, lng: 113.0 },
-        name: "时代天韵"
+        // price: 20000,
+        // area: "80|100|120",
+        location: {  },
+        // name: "时代天韵"
       },
       zoom: 15
     };
   },
   created() {},
-  mounted() {}
+  mounted() {
+    sale_utils.getProjects().then(projects => {
+      let currentPrj = projects.find(
+        x => x.projectInfoId == this.$route.params.id
+      );
+      this.project = this.convertToPageProject(currentPrj);
+    });
+  },
+  methods: {
+    convertToPageProject(prj) {
+      return {
+        price: prj.price,
+        name: prj.name,
+        location: { lat: prj.lat, lng: prj.log },
+        area: prj.area
+      };
+    }
+  }
 };
 </script>
 

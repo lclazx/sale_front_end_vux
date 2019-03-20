@@ -13,7 +13,7 @@ export default {
     // wechat_util.check_login();
   },
   mounted() {
-    wechat_util.check_login();
+    // wechat_util.check_login();
   },
   methods: {
     get_user_info() {}
