@@ -6,6 +6,10 @@
         style="width:100%;position:absolute;left:0;top:0;z-index:100;"
       >{{project.name}}</x-header>
       <tabbar slot="bottom">
+        <tabbar-item link="/Map">
+          <img slot="icon" src="../../assets/img/map.png">
+          <span slot="label">地图看房</span>
+        </tabbar-item>
         <tabbar-item link="/contact">
           <img slot="icon" src="../../assets/img/contact.png">
           <span slot="label">联系客服</span>
@@ -95,7 +99,7 @@ export default {
       project: {
         // price: 20000,
         // area: "80|100|120",
-        location: {  },
+        location: {}
         // name: "时代天韵"
       },
       zoom: 15
@@ -115,7 +119,7 @@ export default {
       return {
         price: prj.price,
         name: prj.name,
-        location: { lat: prj.lat, lng: prj.log },
+        location: { lat: prj.lat, lng: prj.lng },
         area: prj.area
       };
     }

@@ -16,12 +16,10 @@
         :sale="sale"
         @click="customMarkerClick"
       ></custom-marker>
+      <x-dialog class="dialog-demo" :title="currentProject&&currentProject.name" v-model="showDialog" hide-on-blur>
+        <project-card :project="currentProject"/>
+      </x-dialog>
     </baidu-map>
-    <!-- <project-info
-      :project="currentProject"
-      v-if="currentProject!=null&&currentProject.showInfo"
-      :sale="sale"
-    />-->
   </div>
 </template>
 
@@ -30,9 +28,18 @@ import { BaiduMap, BmMarker } from "vue-baidu-map";
 import ProjectInfo from "../controls/ProjectInfo.vue";
 import CustomMarker from "../controls/CustomMarker.vue";
 import sale_utils from "../../utils/sale_utils";
+import ProjectCard from "../controls/ProjectCard.vue";
+import { XDialog } from "vux";
 export default {
   props: { location: Object },
-  components: { BaiduMap, BmMarker, ProjectInfo, CustomMarker },
+  components: {
+    BaiduMap,
+    BmMarker,
+    ProjectInfo,
+    CustomMarker,
+    XDialog,
+    ProjectCard
+  },
   data() {
     return {
       center: this.$props.location || "广州",
@@ -43,17 +50,19 @@ export default {
       sale: {
         phone: "13570437810",
         qrcode: "https://www.baidu.com/img/bd_logo1.png?where=super"
-      }
+      },
+      showDialog: false
     };
   },
   methods: {
     handler({ BMap, map }) {
-      this.zoom = 15;
+      this.zoom = 16;
     },
     infoWindowClose() {},
     customMarkerClick(e) {
       this.center = { lng: e.lng, lat: e.lat };
       e.showInfo = true;
+      this.showDialog = true;
       this.currentProject = e;
     }
   },
@@ -63,7 +72,7 @@ export default {
       let project = this.projects.find(
         x => x.projectInfoId == this.$route.params.id
       );
-      this.center = { lat: project.lat/1000, lng: project.log/1000 };
+      this.center = { lat: project.lat, lng: project.lng };
       this.currentProject = project;
     } else {
       let _this = this;
@@ -84,12 +93,33 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less" scoped>
+@import "~vux/src/styles/close";
+
 .bm-view {
   height: 100%;
   width: 100%;
 }
 .map-container {
   height: 100%;
+}
+.dialog-demo {
+  .weui-dialog {
+    border-radius: 8px;
+    padding-bottom: 8px;
+    display: flex
+  }
+  .dialog-title {
+    line-height: 30px;
+    color: #666;
+  }
+  .img-box {
+    height: 350px;
+    overflow: hidden;
+  }
+  .vux-close {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
 }
 </style>

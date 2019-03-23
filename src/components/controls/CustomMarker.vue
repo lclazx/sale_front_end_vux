@@ -2,27 +2,22 @@
   <bm-marker
     :position="{lng:project.lng,lat:project.lat}"
     :title="project.projectInfoId.toString()"
+    animation="BMAP_ANIMATION_BOUNCE"
     @click="click"
   >
-    <bm-info-window
-      :show="project.showInfo"
-      @open="project.showInfo=true"
-      @close="close"
-    >
-      <!-- <project-info
-        :project="project"
-        :sale="sale"
-      ></project-info> -->
-    </bm-info-window>
+    <bm-label
+      :content="project.name"
+      :labelStyle="{color: '', fontSize : '14px',transform: 'translateX(-25%)', background:'#999', border:'0'}"
+      :offset="{width:0,height:-22}"
+    />
   </bm-marker>
 </template>
 
 <script>
-import ProjectInfo from "./ProjectInfo.vue";
-import { BmMarker, BmInfoWindow } from "vue-baidu-map";
+import { BmLabel, BmMarker, BmInfoWindow } from "vue-baidu-map";
 
 export default {
-  components: { ProjectInfo, BmMarker, BmInfoWindow },
+  components: { BmMarker, BmInfoWindow, BmLabel },
   props: { project: Object, sale: Object },
   methods: {
     click: function(e) {
@@ -34,9 +29,8 @@ export default {
     }
   },
   data() {
-    return {
-    };
-  }
+    return {};
+  },
 };
 </script>
 
