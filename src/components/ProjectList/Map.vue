@@ -9,6 +9,10 @@
       class="bm-view"
       ak="3662942c3c1ec12221e4ac924ee11efe"
     >
+      <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation>
+      <bm-city-list anchor="BMAP_ANCHOR_TOP_LEFT"></bm-city-list>
+      <bm-geolocation anchor="BMAP_ANCHOR_BOTTOM_RIGHT" :showAddressBar="true" :autoLocation="true"></bm-geolocation>
+      <!-- <custom-city-cluster :projects="projects" :sale="sale"/> -->
       <custom-marker
         v-for="item in projects"
         :key="item.projectInfoId"
@@ -16,7 +20,12 @@
         :sale="sale"
         @click="customMarkerClick"
       ></custom-marker>
-      <x-dialog class="dialog-demo" :title="currentProject&&currentProject.name" v-model="showDialog" hide-on-blur>
+      <x-dialog
+        class="dialog-demo"
+        :title="currentProject&&currentProject.name"
+        v-model="showDialog"
+        hide-on-blur
+      >
         <project-card :project="currentProject"/>
       </x-dialog>
     </baidu-map>
@@ -24,9 +33,16 @@
 </template>
 
 <script>
-import { BaiduMap, BmMarker } from "vue-baidu-map";
+import {
+  BaiduMap,
+  BmMarker,
+  BmNavigation,
+  BmCityList,
+  BmGeolocation
+} from "vue-baidu-map";
 import ProjectInfo from "../controls/ProjectInfo.vue";
 import CustomMarker from "../controls/CustomMarker.vue";
+import CustomCityCluster from "../controls/CustomCityCluster.vue";
 import sale_utils from "../../utils/sale_utils";
 import ProjectCard from "../controls/ProjectCard.vue";
 import { XDialog } from "vux";
@@ -36,9 +52,13 @@ export default {
     BaiduMap,
     BmMarker,
     ProjectInfo,
+    ProjectCard,
     CustomMarker,
     XDialog,
-    ProjectCard
+    BmNavigation,
+    BmCityList,
+    BmGeolocation,
+    CustomCityCluster
   },
   data() {
     return {
@@ -76,20 +96,11 @@ export default {
       this.currentProject = project;
     } else {
       let _this = this;
-      this.$wechat.getLocation({
-        type: "wgs84",
-        success: function(res) {
-          var latitude = res.latitude;
-          var longitude = res.longitude;
-          _this.center = { lat: latitude, lng: longitude };
-          _this.center.lng = longitude;
-          _this.center.lat = latitude;
-          _this.zoom = 10;
-          console.log(_this.center);
-        }
-      });
+      this.center = JSON.parse(window.localStorage["center"]) || "广州";
+      // console.log(this.$wechat);
     }
-  }
+  },
+  created() {}
 };
 </script>
 
@@ -107,7 +118,7 @@ export default {
   .weui-dialog {
     border-radius: 8px;
     padding-bottom: 8px;
-    display: flex
+    display: flex;
   }
   .dialog-title {
     line-height: 30px;

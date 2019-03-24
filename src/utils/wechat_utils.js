@@ -1,35 +1,57 @@
 / * eslint - disable * /
-import Vue from 'vue'
 import axios from 'axios';
+import { stringify } from 'querystring';
 
 function split_url() {
-    let url = /[\w\S]+(?=#)/.exec(window.location.href).toString()
-        //let state = /(?=#\/)[\w\S]+/g.exec(window.location.href).toString();
-    let state = window.location.href.replace(url, '');
+    let url = /[\w\S]+(?=[#])/.exec(window.location.href).toString()
+        // let url = /[\w\S]+(?=[?])/.exec(/[\w\S]+(?=[#])/.exec(window.location.href))
+    let state = /(?=#\/)[\w\S]+/g.exec(window.location.href).toString();
+    // let state = window.location.href.replace(url, '');
     state = state.replace('#/', '');
 
     return { url, state };
 }
 export default {
-    init_wechat() {
+    init_wechat(vue) {
+        let splited_url = split_url();
+        let url = splited_url.url;
+        let state = splited_url.state;
+        // window.location.href = `${url}#/${state||''}`;
         let nonce = new Date().getTime();
-        let timestamp = Math.round(nonce / 1000);
-        let url = split_url().url;
-        axios.get(`/api/open/JsSdkSignature?noncestr=${nonce}&timestamp=${timestamp}&url=${url}`).then(res => {
+        let timestamp = nonce / 1000;
+        let encodedUri = encodeURIComponent(url);
+        var signatureUrl = `/api/open/JsSdkSignature?noncestr=${nonce}&timestamp=${timestamp}&url=${encodedUri}`;
+        axios.get(signatureUrl).then(res => {
+            // alert(res.data);
             console.log(res);
-            Vue.wechat.config({
-                // beta: true,
+            vue.wechat.config({
                 // debug: true,
                 appId: "wx69e3e015be8feebd",
                 timestamp: timestamp,
-                nonceStr: nonce,
+                nonceStr: nonce.toString(),
                 signature: res.data,
-                jsApiList: ['getLocation', 'chooseImage', 'uploadImage']
+                jsApiList: ['getLocation']
             })
-            Vue.wechat.ready(function() {
-                console.log("ready");
+            vue.wechat.ready(function() {
+                try {
+                    vue.wechat.getLocation({
+                        type: "wgs84",
+                        success: function(res) {
+                            console.log(res);
+                            var latitude = res.latitude;
+                            var longitude = res.longitude;
+                            var center = { lat: latitude, lng: longitude };
+                            window.localStorage['center'] = JSON.stringify(center);
+                        },
+                        fail: function(res) {
+                            alert(JSON.stringify(res));
+                        }
+                    });
+                } catch (e) {
+                    alert('无法获取您的地理位置');
+                }
             })
-            Vue.wechat.error(function(res) {
+            vue.wechat.error(function(res) {
                 console.log(res);
             })
         });

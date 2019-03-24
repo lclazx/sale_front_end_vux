@@ -151,6 +151,7 @@ export default {
   align-items: stretch;
   width: 100%;
   flex: 1;
+  height: 200px;
 }
 
 .flex-container {

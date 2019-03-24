@@ -35,16 +35,16 @@
 </template>
 
 <script>
-import { Swiper, XImg, XDialog, XButton } from "vux";
+import { Swiper, XImg, XDialog, XButton, Card } from "vux";
 export default {
-  components: { XImg, XDialog, Swiper, XButton },
+  components: { XImg, XDialog, Swiper, XButton, Card },
   props: { project: Object }
 };
 </script>
 
 <style scoped>
 div {
-  background: #e5e6e6;
+  background: #ffffff;
 }
 .container {
   margin: 0 auto;
