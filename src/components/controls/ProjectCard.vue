@@ -25,7 +25,11 @@
       </div>
     </card>
     <p>
-      <x-button type="default" class="detail" :link="`/project/${project&&project.projectInfoId}`">
+      <x-button
+        type="default"
+        class="detail"
+        :link="`/projectDetail/${project&&project.projectInfoId}`"
+      >
         点击查看
         <b class="project-name">{{project&&project.name}}</b>
         详情>>

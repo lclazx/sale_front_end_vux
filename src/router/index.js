@@ -19,6 +19,9 @@ export default new Router({
         name: 'Container',
         component: Container,
         children: [{
+                path: '/',
+                component: Map
+            }, {
                 path: 'list',
                 component: List
             }, {

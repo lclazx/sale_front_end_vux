@@ -2,7 +2,6 @@
   <bm-marker
     :position="{lng:project.lng,lat:project.lat}"
     :title="project.projectInfoId.toString()"
-    animation="BMAP_ANIMATION_BOUNCE"
     @click="click"
   >
     <bm-label
@@ -30,7 +29,7 @@ export default {
   },
   data() {
     return {};
-  },
+  }
 };
 </script>
 

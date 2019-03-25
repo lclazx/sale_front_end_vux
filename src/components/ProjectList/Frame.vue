@@ -1,10 +1,6 @@
 <template>
   <div class="times-plus">
-    <iframe
-      class="times-plus"
-      ref="iframe"
-      :src="`http://times-plus.timesgroup.cn/recommendation.html#/detail/${this.project&&this.project.caption}`"
-    />
+    <iframe class="times-plus" ref="iframe" :src="frameUrl"/>
     <!-- <x-button @click.native="click" text="test" type="primary"/> -->
   </div>
 </template>
@@ -18,13 +14,16 @@ export default {
   data() {
     return {
       projectId: this.$route.params.id,
-      project: {}
+      project: {},
+      frameUrl: ""
     };
   },
-  async mounted() {
+  async created() {
     let id = this.$route.params.id;
     let projects = await sale_utils.getProjects();
-    this.project = projects.find(x => x.projectInfoId == projectId);
+    this.project = projects.find(x => x.projectInfoId == id);
+    this.frameUrl = `http://times-plus.timesgroup.cn/recommendation.html#/detail/${this
+      .project && this.project.caption}`;
   },
   methods: {
     click() {
