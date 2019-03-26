@@ -1,26 +1,17 @@
 <template>
   <div style="height:100%">
-    <view-box
-      ref="viewBox"
-      body-padding-top="45px"
-    >
+    <view-box ref="viewBox" body-padding-top="45px">
       <x-header
         slot="header"
         style="width:100%;position:absolute;left:0;top:0;z-index:100;"
       >{{project.name}}</x-header>
       <tabbar slot="bottom">
         <tabbar-item link="/Map">
-          <img
-            slot="icon"
-            src="../../assets/img/map.png"
-          >
+          <img slot="icon" src="../../assets/img/map.png">
           <span slot="label">地图看房</span>
         </tabbar-item>
         <tabbar-item link="/contact">
-          <img
-            slot="icon"
-            src="../../assets/img/contact.png"
-          >
+          <img slot="icon" src="../../assets/img/contact.png">
           <span slot="label">联系客服</span>
         </tabbar-item>
       </tabbar>
@@ -35,10 +26,7 @@
             dots-position="center"
           ></swiper>
           <card :header="{title:project.name}">
-            <div
-              slot="content"
-              class="card-demo-flex card-demo-content01"
-            >
+            <div slot="content" class="card-demo-flex card-demo-content01">
               <div class="vux-1px-r">
                 <span>{{project.type}}</span>
                 <br>产品类型
@@ -63,17 +51,61 @@
           class="bm-view"
           ak="3662942c3c1ec12221e4ac924ee11efe"
         >
+          <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation>
           <bm-marker :position="project.location"></bm-marker>
         </baidu-map>
+        <divider>户型图</divider>
+        <a :href="`.#/image/designs/${project.id}`">
+          <div class="image-link">
+            <flexbox class="preview-container">
+              <flexbox-item>
+                <div>
+                  <img class="preview-image" :src="images.length>0&&images[0].img">
+                </div>
+              </flexbox-item>
+              <flexbox-item>
+                <div>
+                  <img class="preview-image" :src="images.length>1&&images[1].img">
+                </div>
+                <!-- <p class="preview-title">{{images.length>1&&images[1].title}}</p> -->
+              </flexbox-item>
+              <flexbox-item>
+                <div>
+                  <img class="preview-image" :src="images.length>2&&images[2].img">
+                </div>
+                <!-- <p class="preview-title">{{images.length>2&&images[2].title}}</p> -->
+              </flexbox-item>
+            </flexbox>
+          </div>
+        </a>
+        <divider>实景图</divider>
+        <a :href="`.#/image/photoes/${project.id}`">
+          <div class="image-link">
+            <flexbox class="preview-container">
+              <flexbox-item>
+                <div>
+                  <img class="preview-image" :src="images.length>0&&images[0].img">
+                </div>
+              </flexbox-item>
+              <flexbox-item>
+                <div>
+                  <img class="preview-image" :src="images.length>1&&images[1].img">
+                </div>
+                <!-- <p class="preview-title">{{images.length>1&&images[1].title}}</p> -->
+              </flexbox-item>
+              <flexbox-item>
+                <div>
+                  <img class="preview-image" :src="images.length>2&&images[2].img">
+                </div>
+                <!-- <p class="preview-title">{{images.length>2&&images[2].title}}</p> -->
+              </flexbox-item>
+            </flexbox>
+          </div>
+        </a>
         <divider>项目简介</divider>
         <p>推荐理由</p>
         <divider>项目简介</divider>
         <p>推荐理由</p>
-        <divider>项目简介</divider>
-        <p>推荐理由</p>
-        <divider>项目简介</divider>
-        <p>推荐理由</p>
-
       </div>
     </view-box>
   </div>
@@ -91,7 +123,7 @@ import {
   Tabbar,
   TabbarItem
 } from "vux";
-import { BaiduMap, BmMarker } from "vue-baidu-map";
+import { BaiduMap, BmMarker, BmNavigation } from "vue-baidu-map";
 import sale_utils from "../../utils/sale_utils";
 export default {
   props: { id: Number },
@@ -106,6 +138,7 @@ export default {
     ViewBox,
     XHeader,
     Tabbar,
+    BmNavigation,
     TabbarItem
   },
   data() {
@@ -138,10 +171,12 @@ export default {
   methods: {
     convertToPageProject(prj) {
       return {
+        id: prj.projectInfoId,
         price: prj.price,
         name: prj.name,
         location: { lat: prj.lat, lng: prj.lng },
-        area: prj.area
+        area: prj.area,
+        type: prj.type
       };
     }
   }
@@ -174,13 +209,33 @@ export default {
   flex: 1;
   height: 150px;
 }
-
+.image-link {
+  margin: 5px;
+}
 .flex-container {
   display: flex;
   display: -webkit-flex;
   flex-direction: column;
   height: 100%;
   -webkit-box-orient: vertical;
+}
+.preview-image {
+  /* width: 25%; */
+  /* width: 30%; */
+  width: 80%;
+  margin: 10px 10px;
+}
+
+.preview-container {
+  background: #777;
+  /* margin: 0 auto; */
+  /* width: 90%; */
+}
+
+.preview-title {
+  font-size: 10px;
+  align-content: center;
+  margin: 0 auto;
 }
 
 .info-container {

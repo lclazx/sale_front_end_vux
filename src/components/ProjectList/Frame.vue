@@ -11,7 +11,6 @@
 
 <script>
 import { XButton } from "vux";
-import sale_utisl from "../../utils/sale_utils";
 import sale_utils from "../../utils/sale_utils";
 export default {
   components: { XButton },
