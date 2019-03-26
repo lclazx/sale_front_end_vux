@@ -1,21 +1,30 @@
 <template>
   <div style="height:100%">
-    <view-box ref="viewBox" body-padding-top="45px">
+    <view-box
+      ref="viewBox"
+      body-padding-top="45px"
+    >
       <x-header
         slot="header"
         style="width:100%;position:absolute;left:0;top:0;z-index:100;"
       >{{project.name}}</x-header>
       <tabbar slot="bottom">
         <tabbar-item link="/Map">
-          <img slot="icon" src="../../assets/img/map.png">
+          <img
+            slot="icon"
+            src="../../assets/img/map.png"
+          >
           <span slot="label">地图看房</span>
         </tabbar-item>
         <tabbar-item link="/contact">
-          <img slot="icon" src="../../assets/img/contact.png">
+          <img
+            slot="icon"
+            src="../../assets/img/contact.png"
+          >
           <span slot="label">联系客服</span>
         </tabbar-item>
       </tabbar>
-      <div class="flex-container">
+      <div>
         <div clas="info-container">
           <swiper
             :list="images"
@@ -25,11 +34,14 @@
             dots-class="custom-bottom"
             dots-position="center"
           ></swiper>
-          <card :header="{title:'项目信息'}">
-            <div slot="content" class="card-demo-flex card-demo-content01">
+          <card :header="{title:project.name}">
+            <div
+              slot="content"
+              class="card-demo-flex card-demo-content01"
+            >
               <div class="vux-1px-r">
-                <span>{{project.price}}</span>
-                <br>单价
+                <span>{{project.type}}</span>
+                <br>产品类型
               </div>
               <div class="vux-1px-r">
                 <span>{{project.area}}</span>
@@ -53,6 +65,15 @@
         >
           <bm-marker :position="project.location"></bm-marker>
         </baidu-map>
+        <divider>项目简介</divider>
+        <p>推荐理由</p>
+        <divider>项目简介</divider>
+        <p>推荐理由</p>
+        <divider>项目简介</divider>
+        <p>推荐理由</p>
+        <divider>项目简介</divider>
+        <p>推荐理由</p>
+
       </div>
     </view-box>
   </div>
@@ -97,10 +118,7 @@ export default {
         }
       ],
       project: {
-        // price: 20000,
-        // area: "80|100|120",
         location: {}
-        // name: "时代天韵"
       },
       zoom: 15
     };
@@ -113,6 +131,9 @@ export default {
       );
       this.project = this.convertToPageProject(currentPrj);
     });
+    sale_utils
+      .getImageList(this.$route.params.id)
+      .then(res => (this.images = res.data));
   },
   methods: {
     convertToPageProject(prj) {
@@ -151,7 +172,7 @@ export default {
   align-items: stretch;
   width: 100%;
   flex: 1;
-  height: 200px;
+  height: 150px;
 }
 
 .flex-container {

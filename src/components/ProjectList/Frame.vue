@@ -1,6 +1,10 @@
 <template>
   <div class="times-plus">
-    <iframe class="times-plus" ref="iframe" :src="frameUrl"/>
+    <iframe
+      class="times-plus"
+      ref="iframe"
+      :src="frameUrl"
+    />
     <!-- <x-button @click.native="click" text="test" type="primary"/> -->
   </div>
 </template>
