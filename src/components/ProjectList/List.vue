@@ -1,5 +1,5 @@
 <template>
-  <panel type="1" header="列表" :footer="{title:'更多', url:'http://www.baidu.com/'}" :list="list"/>
+  <panel type="1" header="楼盘列表" :list="list"/>
 </template>
 
 <script>

@@ -3,12 +3,12 @@
     <view-box ref="viewBox" body-padding-top="45px">
       <x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">
         <span>{{title}}</span>
-        <x-icon
+        <!-- <x-icon
           slot="right"
           type="navicon"
           size="35"
           style="fill:#fff;position:relative;top:-8px;left:-3px;"
-        />
+        /> -->
       </x-header>
       <router-view></router-view>
       <tabbar slot="bottom">
