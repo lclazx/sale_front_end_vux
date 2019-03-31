@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       weixin_qrcode: "../../assets/img/zx.jpg",
-      name: "陈潜",
+      name: "张熙",
       phone: "13570437810"
     };
   }

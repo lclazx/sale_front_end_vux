@@ -3,18 +3,18 @@
     <view-box ref="viewBox" body-padding-top="45px">
       <x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">
         <span>{{title}}</span>
-        <!-- <x-icon
+        <x-icon
           slot="right"
           type="navicon"
           size="35"
           style="fill:#fff;position:relative;top:-8px;left:-3px;"
-        /> -->
+        />
       </x-header>
       <router-view></router-view>
       <tabbar slot="bottom">
         <tabbar-item link="/list">
           <img slot="icon" src="../assets/img/building.png">
-          <span slot="label">列表</span>
+          <span slot="label">项目列表</span>
         </tabbar-item>
         <tabbar-item link="/map">
           <img slot="icon" src="../assets/img/map.png">
@@ -24,10 +24,10 @@
           <img slot="icon" src="../assets/img/contact.png">
           <span slot="label">联系客服</span>
         </tabbar-item>
-        <tabbar-item link="/me">
+        <!-- <tabbar-item link="/me">
           <img slot="icon" src="../assets/img/me.png">
           <span slot="label">个人中心</span>
-        </tabbar-item>
+        </tabbar-item> -->
       </tabbar>
     </view-box>
   </div>

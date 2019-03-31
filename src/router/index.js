@@ -39,7 +39,8 @@ export default new Router({
             {
                 path: 'me',
                 component: Me
-            }, {
+            },
+            {
                 path: '/client/consult',
                 component: Consult
             }, {
