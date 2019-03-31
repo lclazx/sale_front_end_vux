@@ -102,10 +102,10 @@
             </flexbox>
           </div>
         </a>
-        <divider>项目简介</divider>
+        <!-- <divider>项目简介</divider>
         <p>推荐理由</p>
         <divider>项目简介</divider>
-        <p>推荐理由</p>
+        <p>推荐理由</p>-->
       </div>
     </view-box>
   </div>
@@ -164,9 +164,10 @@ export default {
       );
       this.project = this.convertToPageProject(currentPrj);
     });
-    sale_utils
-      .getImageList(this.$route.params.id)
-      .then(res => (this.images = res.data));
+    sale_utils.getImageList(this.$route.params.id).then(res => {
+      this.images = res.data;
+      this.images.forEach(x => (x.title = ""));
+    });
   },
   methods: {
     convertToPageProject(prj) {
