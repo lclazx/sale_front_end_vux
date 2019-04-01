@@ -1,24 +1,16 @@
 <template>
   <div>
-    <divider>添加<b style="color:red">{{name}}</b>的微信咨询</divider>
+    <divider>
+      添加
+      <b style="color:red">{{name}}</b>的微信咨询
+    </divider>
     <div class="flex">
-      <img
-        style="height:20px;width:20px"
-        src="../../assets/img/contact.png"
-      />
-      <a
-        style="text-decoration:underline"
-        href="tel:13570437810"
-      >13570437810</a></div>
-    <img
-      class="flex-img"
-      src="../../assets/img/zx.jpg"
-    />
+      <img style="height:20px;width:20px" src="../../assets/img/contact.png">
+      <a style="text-decoration:underline" href="tel:13570437810">13570437810</a>
+    </div>
+    <img class="flex-img" src="../../assets/img/zx.jpg">
     <divider>公众号咨询</divider>
-    <img
-      class="flex-img"
-      src="../../assets/img/mp_qrcode.png"
-    />
+    <img class="flex-img" src="../../assets/img/mp_qrcode.png">
     <div class="flex">
       <b>筑梦时代</b>
     </div>
@@ -27,6 +19,7 @@
 
 <script>
 import { Group, Divider, Flexbox, FlexboxItem } from "vux";
+import window_utils from "../../utils/window_utils";
 export default {
   components: { Group, Divider, Flexbox, FlexboxItem },
   data() {
@@ -35,6 +28,9 @@ export default {
       name: "张熙",
       phone: "13570437810"
     };
+  },
+  mounted() {
+    let params = window_utils.splitSearch();
   }
 };
 </script>
