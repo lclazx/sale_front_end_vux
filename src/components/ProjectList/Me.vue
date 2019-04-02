@@ -117,7 +117,7 @@ export default {
           .then(res => {
             this.loading = false;
             this.title = "资料提交成功，请复制你的推广链接";
-            this.message = `http://times.zhumenginfo.com?sale=${
+            this.message = `http://times.zhumenginfo.com/?sale=${
               res.data.saleInfoId
             }`;
             this.showAlert = true;

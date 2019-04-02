@@ -25,7 +25,7 @@ export default {
   components: { Group, Divider, Flexbox, FlexboxItem },
   data() {
     return {
-      weixin_qrcode: "../../assets/img/zx.jpg",
+      weixin_qrcode: "./static/img/zx.jpg",
       name: "张熙",
       phone: "13570437810"
     };
