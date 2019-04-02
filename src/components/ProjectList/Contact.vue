@@ -6,9 +6,9 @@
     </divider>
     <div class="flex">
       <img style="height:20px;width:20px" src="../../assets/img/contact.png">
-      <a style="text-decoration:underline" href="tel:13570437810">13570437810</a>
+      <a style="text-decoration:underline" :href="`tel:${phone}`">{{phone}}</a>
     </div>
-    <img class="flex-img" src="../../assets/img/zx.jpg">
+    <img class="flex-img" :src="weixin_qrcode">
     <divider>公众号咨询</divider>
     <img class="flex-img" src="../../assets/img/mp_qrcode.png">
     <div class="flex">
@@ -20,6 +20,7 @@
 <script>
 import { Group, Divider, Flexbox, FlexboxItem } from "vux";
 import window_utils from "../../utils/window_utils";
+import axios from "axios";
 export default {
   components: { Group, Divider, Flexbox, FlexboxItem },
   data() {
@@ -31,6 +32,14 @@ export default {
   },
   mounted() {
     let params = window_utils.splitSearch();
+    let saleId = params.sale;
+    axios.get(`/api/saleinfo/index/${saleId}`).then(res => {
+      if (res && res.status == 200) {
+        this.weixin_qrcode = res.data.qrCodeUrl;
+        this.name = res.data.name;
+        this.phone = res.data.saleSlogan;
+      }
+    });
   }
 };
 </script>

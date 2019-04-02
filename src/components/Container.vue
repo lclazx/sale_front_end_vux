@@ -24,10 +24,10 @@
           <img slot="icon" src="../assets/img/contact.png">
           <span slot="label">联系客服</span>
         </tabbar-item>
-        <tabbar-item link="/me">
+        <!-- <tabbar-item link="/me">
           <img slot="icon" src="../assets/img/me.png">
           <span slot="label">个人中心</span>
-        </tabbar-item>
+        </tabbar-item>-->
       </tabbar>
     </view-box>
   </div>
@@ -41,9 +41,9 @@ export default {
   name: "Container",
   data() {
     return {
-      title: "时代中国",
+      title: "时代中国"
     };
-  },
+  }
 };
 </script>
 
