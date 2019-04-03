@@ -18,15 +18,18 @@
       />
     </group>
     <divider>个人微信二维码</divider>
-    <div>
+    <div style="position:relative">
       <input ref="avatar" @change="selectImage" id="avatar" type="file" accept="image/*">
       <a v-if="!imageSelected" class="avatar-preview">
-        <img src="../../assets/img/upload.png" @click="avatarClicked">
+        <img src="../../assets/img/upload.png">
         <p>点击上传微信二维码</p>
       </a>
-      <img :src="qrcode" class="avatar-preview" @click="avatarClicked" v-if="imageSelected">
+      <img :src="qrcode" class="avatar-preview" v-if="imageSelected">
     </div>
-    <x-button type="primary" @click.native="upload">上传</x-button>
+    <div></div>
+    <div>
+      <x-button type="primary" @click.native="upload">提交</x-button>
+    </div>
     <div v-transfer-dom>
       <alert v-model="showAlert" :title="title">{{message}}</alert>
     </div>
@@ -81,9 +84,6 @@ export default {
     };
   },
   methods: {
-    avatarClicked() {
-      this.$refs.avatar.click();
-    },
     selectImage(event) {
       let file = event.target;
       if (!file.files || !file.files[0]) return;
@@ -140,12 +140,25 @@ export default {
 
 <style scoped>
 #avatar {
-  display: none;
+  /* display: none; */
+  /* visibility: hidden; */
+  /* height: 0; */
 }
 
 .avatar-preview {
   margin: 0 auto;
   /* width: 200px; */
   max-height: 400px;
+  display: block;
+}
+
+input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 400px;
+  border: 1px solid #000;
+  opacity: 0;
 }
 </style>
