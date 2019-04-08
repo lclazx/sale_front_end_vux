@@ -11,6 +11,7 @@ import Consult from '@/components/client/Consult.vue'
 import Frame from '@/components/ProjectList/Frame.vue'
 import Promote from '@/components/client/Promote.vue'
 import ImageViewer from '@/components/ProjectList/ImageViewer'
+import CalcPrice  from '@/components/ProjectList/CalcPrice.vue'   
 
 Vue.use(Router)
 
@@ -35,6 +36,9 @@ export default new Router({
             {
                 path: 'contact',
                 component: Contact
+            }, {
+                path: 'calcPrice',
+                component: CalcPrice
             },
             {
                 path: 'me',
