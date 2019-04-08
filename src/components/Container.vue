@@ -20,6 +20,10 @@
           <img slot="icon" src="../assets/img/map.png">
           <span slot="label">地图</span>
         </tabbar-item>
+        <tabbar-item link="/calcPrice">
+          <img slot="icon" src="../assets/img/美元3.png">
+          <span slot="label">房价计算</span>
+        </tabbar-item>
         <tabbar-item link="/contact">
           <img slot="icon" src="../assets/img/contact.png">
           <span slot="label">联系客服</span>
