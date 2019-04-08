@@ -3,7 +3,7 @@
     <div style="height:44px;">
       <tab v-model="index01">
         <tab-item selected @on-item-click="changeTab">分期</tab-item>
-        <tab-item @on-item-click="changeTab">贷款</tab-item>
+        <!-- <tab-item @on-item-click="changeTab">贷款</tab-item> -->
       </tab>
     </div>
     <div v-if="displayTab">
@@ -72,10 +72,10 @@ export default {
       index01: 0,
       index: 1,
       displayTab: true,
-      sumPrice: "",
-      firstPriceRatio: "",
+      sumPrice: 1000000,
+      firstPriceRatio: 10,
       firstPrice: 0,
-      priods: "",
+      priods: 6,
       priodsPrice: []
     };
   },
