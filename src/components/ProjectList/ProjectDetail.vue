@@ -54,7 +54,7 @@
           <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation>
           <bm-marker :position="project.location"></bm-marker>
         </baidu-map>
-        <div v-for="(images, category) in imageDict" v-key="category">
+        <div v-for="(images, category) in imageDict" :key="category">
           <div v-if="category!='covers'&&images.length>0">
             <divider>{{category}}</divider>
             <a :href="`.#/image/${category}/${project.id}`">
