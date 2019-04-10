@@ -18,7 +18,7 @@
       <div>
         <div clas="info-container">
           <swiper
-            :list="images"
+            :list="imageDict&&imageDict['covers']"
             auto
             style="width:100%;margin:0 auto;"
             height="180px"
@@ -54,58 +54,32 @@
           <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation>
           <bm-marker :position="project.location"></bm-marker>
         </baidu-map>
-        <divider>户型图</divider>
-        <a :href="`.#/image/designs/${project.id}`">
-          <div class="image-link">
-            <flexbox class="preview-container">
-              <flexbox-item>
-                <div>
-                  <img class="preview-image" :src="images.length>0&&images[0].img">
-                </div>
-              </flexbox-item>
-              <flexbox-item>
-                <div>
-                  <img class="preview-image" :src="images.length>1&&images[1].img">
-                </div>
-                <!-- <p class="preview-title">{{images.length>1&&images[1].title}}</p> -->
-              </flexbox-item>
-              <flexbox-item>
-                <div>
-                  <img class="preview-image" :src="images.length>2&&images[2].img">
-                </div>
-                <!-- <p class="preview-title">{{images.length>2&&images[2].title}}</p> -->
-              </flexbox-item>
-            </flexbox>
+        <div v-for="(images, category) in imageDict" v-key="category">
+          <div v-if="category!='covers'&&images.length>0">
+            <divider>{{category}}</divider>
+            <a :href="`.#/image/${category}/${project.id}`">
+              <div class="image-link">
+                <flexbox class="preview-container">
+                  <flexbox-item>
+                    <div>
+                      <img class="preview-image" :src="images.length>0&&images[0].img">
+                    </div>
+                  </flexbox-item>
+                  <flexbox-item>
+                    <div>
+                      <img class="preview-image" :src="images.length>1&&images[1].img">
+                    </div>
+                  </flexbox-item>
+                  <flexbox-item>
+                    <div>
+                      <img class="preview-image" :src="images.length>2&&images[2].img">
+                    </div>
+                  </flexbox-item>
+                </flexbox>
+              </div>
+            </a>
           </div>
-        </a>
-        <divider>实景图</divider>
-        <a :href="`.#/image/photoes/${project.id}`">
-          <div class="image-link">
-            <flexbox class="preview-container">
-              <flexbox-item>
-                <div>
-                  <img class="preview-image" :src="images.length>0&&images[0].img">
-                </div>
-              </flexbox-item>
-              <flexbox-item>
-                <div>
-                  <img class="preview-image" :src="images.length>1&&images[1].img">
-                </div>
-                <!-- <p class="preview-title">{{images.length>1&&images[1].title}}</p> -->
-              </flexbox-item>
-              <flexbox-item>
-                <div>
-                  <img class="preview-image" :src="images.length>2&&images[2].img">
-                </div>
-                <!-- <p class="preview-title">{{images.length>2&&images[2].title}}</p> -->
-              </flexbox-item>
-            </flexbox>
-          </div>
-        </a>
-        <!-- <divider>项目简介</divider>
-        <p>推荐理由</p>
-        <divider>项目简介</divider>
-        <p>推荐理由</p>-->
+        </div>
       </div>
     </view-box>
   </div>
@@ -143,13 +117,7 @@ export default {
   },
   data() {
     return {
-      images: [
-        {
-          img:
-            "http://times-plus.timesgroup.cn/timesangel/userfiles/projectImage/E2CE0CCF/%E5%85%A8%E6%B0%91%E8%90%A5%E9%94%80%E7%B3%BB%E7%BB%9F_%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%86%8C1080x688px-04.jpg",
-          title: this.$props.id
-        }
-      ],
+      imageDict: { covers: [] },
       project: {
         location: {}
       },
@@ -165,8 +133,7 @@ export default {
       this.project = this.convertToPageProject(currentPrj);
     });
     sale_utils.getImageList(this.$route.params.id).then(res => {
-      this.images = res.data;
-      this.images.forEach(x => (x.title = ""));
+      this.imageDict = res.data;
     });
   },
   methods: {
