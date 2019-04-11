@@ -23,10 +23,16 @@
           </group>
           <div style="margin-top:2p;">
             <divider>计算结果</divider>
-            <ul>
-              <li>首付：￥{{firstPrice}}</li>
-              <li v-for="price in priodsPrice" :key="price.index">第{{price.index}}期：￥{{price.price}}</li>
-            </ul>
+            <div class="timeline-demo">
+              <timeline>
+                <timeline-item>
+                  <h4 class="recent">【首付】 ￥{{firstPrice}}</h4>
+                </timeline-item>
+                <timeline-item v-for="price in priodsPrice" :key="price.index">
+                  <h4>【第{{price.index}}期】 ￥{{price.price}}</h4>
+                </timeline-item>
+              </timeline>
+            </div>
           </div>
         </flexbox-item>
       </flexbox>
@@ -59,14 +65,26 @@
           </group>
           <div style="margin-top:2p;">
             <divider>计算结果</divider>
-            <ul v-if="creditTypeFlag">
-              <li>还款总金额：￥{{totalRepayAmount}}</li>
-              <li>每月还款金额：￥{{mouthRepayAmount}}</li>
-            </ul>
-            <ul v-else>
-              <li>还款总金额：￥{{totalRepayAmount}}</li>
-              <li v-for="price in priodsPrice" :key="price.index">第{{price.index}}期：￥{{price.price}}</li>
-            </ul>
+            <div class="timeline-demo" v-if="creditTypeFlag">
+              <timeline>
+                <timeline-item>
+                  <h4 class="recent">【还款总金额】 ￥{{totalRepayAmount}}</h4>
+                </timeline-item>
+                <timeline-item>
+                  <h4>【每月还款金额】 ￥{{mouthRepayAmount}}</h4>
+                </timeline-item>
+              </timeline>
+            </div>
+            <div class="timeline-demo" v-else>
+              <timeline>
+                <timeline-item>
+                  <h4 class="recent">【还款总金额】 ￥{{totalRepayAmount}}</h4>
+                </timeline-item>
+                <timeline-item v-for="price in priodsPrice" :key="price.index">
+                  <h4>【第{{price.index}}期】 ￥{{price.price}}</h4>
+                </timeline-item>
+              </timeline>
+            </div>
           </div>
         </flexbox-item>
       </flexbox>
@@ -87,7 +105,9 @@ import {
   Divider,
   ButtonTab,
   ButtonTabItem,
-  Selector
+  Selector,
+  Timeline,
+  TimelineItem
 } from "vux";
 import { throws } from "assert";
 
@@ -104,7 +124,9 @@ export default {
     Divider,
     ButtonTab,
     ButtonTabItem,
-    Selector
+    Selector,
+    Timeline,
+    TimelineItem
   },
   data() {
     return {
@@ -202,9 +224,12 @@ export default {
         for (let index = 1; index <= this.repaymentPeriod; index++) {
           var data = new Object();
           data.index = index;
-          data.price =
-            (parseFloat(this.mouthCapital) +
-            parseFloat((this.creditCapital - this.mouthCapital * index) * mouthRate)).toFixed(2);
+          data.price = (
+            parseFloat(this.mouthCapital) +
+            parseFloat(
+              (this.creditCapital - this.mouthCapital * index) * mouthRate
+            )
+          ).toFixed(2);
           this.priodsPrice.push(data);
           this.totalRepayAmount = (
             parseFloat(this.totalRepayAmount) + parseFloat(data.price)
@@ -232,5 +257,20 @@ export default {
   margin: 10px;
   text-align: center;
   border: 1px green solid;
+}
+</style>
+<style lang="less">
+.timeline-demo {
+  p {
+    color: #888;
+    font-size: 0.8rem;
+  }
+  h4 {
+    color: #666;
+    font-weight: normal;
+  }
+  .recent {
+    color: rgb(4, 190, 2);
+  }
 }
 </style>
