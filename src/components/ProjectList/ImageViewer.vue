@@ -33,7 +33,7 @@ export default {
     sale_utils.getImageList(projectId).then(res => {
       this.images = res.data[category];
       this.imageList = this.images.map(x => {
-        return { src: x.img, w: 1200, h: 900 };
+        return { src: x.fullImg, w: 1200, h: 900 };
       });
     });
   },
